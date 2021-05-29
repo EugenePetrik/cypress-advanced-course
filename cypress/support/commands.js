@@ -23,3 +23,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('createBoard', boardName => {
+  cy.visit('/');
+  cy.get('[data-cy=create-board]').click();
+  cy.get('[data-cy=new-board-input]').type(boardName);
+  cy.get('[data-cy=new-board-create]').click();
+});
+
+Cypress.Commands.add('removeBoard', () => {
+  cy.get('[data-cy=board-options]').click();
+  cy.get('[data-cy=delete-board]').click();
+});
+
+Cypress.Commands.add('addList', listName => {
+  cy.get('[data-cy=add-list]').click();
+  cy.get('[data-cy=add-list-input]').type(listName);
+  cy.get('[data-cy=save]').click();
+});
+
+Cypress.Commands.add('addTask', taskName => {
+  cy.get('[data-cy=new-task]').click();
+  cy.get('[data-cy=task-input]').type(taskName);
+  cy.get('[data-cy=add-task]').click();
+});

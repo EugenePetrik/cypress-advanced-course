@@ -21,6 +21,7 @@
         "caughtErrorsIgnorePattern": "^ignore"
       }
     ],
+    "mocha/no-hooks-for-single-case": 0,
     "mocha/no-mocha-arrows": 0,
     "mocha/max-top-level-suites": 0,
     "no-console": "off",
