@@ -21,6 +21,8 @@
         "caughtErrorsIgnorePattern": "^ignore"
       }
     ],
+    "mocha/no-mocha-arrows": 0,
+    "mocha/max-top-level-suites": 0,
     "no-console": "off",
     "no-mixed-spaces-and-tabs": "warn",
     "linebreak-style": ["off", "unix"],
