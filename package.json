@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress open"
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "./node_modules/.bin/cypress run",
+    "start": "cd app && npm start",
+    "postinstall": "cd app && npm install"
   },
   "keywords": [
     "Cypress",
