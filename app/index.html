@@ -358,7 +358,7 @@
           </svg>
         </div>
         <div v-show="loginCardActive">
-          <h2 class="LoginModule_title">Log in to your account</h2>
+          <h2 class="LoginModule_title" data-cy="login-module-title">Log in to your account</h2>
             <div class="credentials">
               <p class="LoginModule_description">Enter your email and password to log in</p>
               <input type="email" placeholder="Email address" data-cy="login-email" id="loginEmail" v-model="loginEmail" autocomplete="off">
@@ -368,10 +368,10 @@
                   Log in</button>
               </div>
             </div>
-            <p class="LoginModule_logSignSwitch">Don’t have an account? <a @click="logSignSwitch">Sign up here</a></p>
+            <p class="LoginModule_logSignSwitch">Don’t have an account? <a data-cy="login-module-sign-up-link" @click="logSignSwitch">Sign up here</a></p>
         </div>
         <div v-show="signupCardActive">
-          <h2 class="LoginModule_title">Sign up to create a free account</h2>
+          <h2 class="LoginModule_title" data-cy="sign-up-module-title">Sign up to create a free account</h2>
             <div class="credentials">
               <p class="LoginModule_description">Enter your email and password to sign up</p>
               <input type="email" placeholder="Email address" id="signupEmail" v-model="signupEmail" data-cy="signup-email" autocomplete="off">
@@ -398,7 +398,7 @@
     <Navbar></Navbar>
     <Login></Login>
     <div id="errorMessage" v-show="errorMessage.show" v-cloak>{{ errorMessage.text }}</div>
-    <div id="loginMessage" v-show="loggedIn.active" v-cloak>User is logged in</div>
+    <div id="loginMessage" data-cy="login-message" v-show="loggedIn.active" v-cloak>User is logged in</div>
     <div id="tools" v-show="tools" v-cloak>Reset application:
       <button @click="resetAll()">All</button>
       <button @click="resetBoards()">Boards</button>

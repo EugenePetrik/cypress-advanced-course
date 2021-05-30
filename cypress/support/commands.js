@@ -47,3 +47,20 @@ Cypress.Commands.add('addTask', taskName => {
   cy.get('[data-cy=task-input]').type(taskName);
   cy.get('[data-cy=add-task]').click();
 });
+
+Cypress.Commands.add('signUpAs', (email, password) => {
+  cy.get('[data-cy=login-menu]').click();
+  cy.get('[data-cy=login-module-sign-up-link]').click();
+  cy.get('[data-cy=sign-up-module-title]').should('have.text', 'Sign up to create a free account');
+  cy.get('[data-cy=signup-email]').type(email);
+  cy.get('[data-cy=signup-password]').type(password);
+  cy.get('[data-cy=signup]').click();
+});
+
+Cypress.Commands.add('loginAs', (email, password) => {
+  cy.get('[data-cy=login-menu]').click();
+  cy.get('[data-cy=login-module-title]').should('have.text', 'Log in to your account');
+  cy.get('[data-cy=login-email]').type(email);
+  cy.get('[data-cy=login-password]').type(password);
+  cy.get('[data-cy=login]').click();
+});
