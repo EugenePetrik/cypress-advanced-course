@@ -261,7 +261,7 @@
 
 		<div class="background_container" v-cloak>
 			<h1 class="background_title" v-show="starred(boards).length" >My Starred</h1>
-			<div class="board" data-cy="board">
+			<div class="board" data-cy="my-starred-boards">
 				<router-link tag="div" class="board_item" data-cy="board_item" v-for="board in starred(boards)" v-on:mouseover.native="showByIndex = board" v-on:mouseout.native="showByIndex = null" :key="board.id" :to="{ path: '/board/' + board.id }">
           <h1 class="board_title" data-cy="board_title">{{ board.name }}</h1>
 					<svg version="1.1" class="Star" data-cy="star"  x="0px" y="0px"
@@ -279,7 +279,7 @@
 				</router-link>
 			</div>
 			<h1 class="background_title">My Boards</h1>
-			<div class="board">
+			<div class="board" data-cy="my-boards">
 				<router-link tag="div" class="board_item" data-cy="board-item" :data-id="'board_' + board.id" v-for="board in boards" :key="board.id" :to="{ path: '/board/' + board.id }"  v-on:mouseover.native="showByIndex = board" v-on:mouseout.native="showByIndex = null">
 					<h1 class="board_title">{{ board.name }}</h1>
 					<svg version="1.1" class="Star" data-cy="star"  x="0px" y="0px"
@@ -397,7 +397,7 @@
 	<div id="trello-app" v-shortkey="['f2']" @shortkey="toggleTools()">
     <Navbar></Navbar>
     <Login></Login>
-    <div id="errorMessage" v-show="errorMessage.show" v-cloak>{{ errorMessage.text }}</div>
+    <div id="errorMessage" data-cy="error-message" v-show="errorMessage.show" v-cloak>{{ errorMessage.text }}</div>
     <div id="loginMessage" data-cy="login-message" v-show="loggedIn.active" v-cloak>User is logged in</div>
     <div id="tools" v-show="tools" v-cloak>Reset application:
       <button @click="resetAll()">All</button>
