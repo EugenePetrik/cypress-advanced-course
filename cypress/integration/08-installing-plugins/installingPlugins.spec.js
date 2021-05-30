@@ -7,6 +7,10 @@ describe('Installing plugins', () => {
   const { listName } = listBuilder();
   const { taskName } = taskBuilder();
 
+  before(() => {
+    cy.task('setupDb');
+  });
+
   beforeEach(() => {
     cy.visit('/');
   });

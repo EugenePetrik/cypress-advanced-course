@@ -6,6 +6,8 @@ describe('Intercepting network requests', () => {
   const { boardName } = boardBuilder();
 
   beforeEach(() => {
+    cy.task('setupDb');
+
     cy.intercept({
       method: 'GET',
       url: '/api/boards',
@@ -16,16 +18,8 @@ describe('Intercepting network requests', () => {
       url: '/api/boards',
     }).as('createBoard');
 
+    cy.visit('/');
     cy.createBoard(boardName);
-  });
-
-  afterEach(() => {
-    cy.request({
-      method: 'POST',
-      url: '/api/reset',
-    }).then(response => {
-      expect(response.status).to.eq(204);
-    });
   });
 
   it('Intercepting network requests - GET', () => {

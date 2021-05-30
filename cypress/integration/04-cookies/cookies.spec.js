@@ -5,6 +5,10 @@ import { userBuild } from '../../support/generateData';
 describe('Cookies', () => {
   const { email, password } = userBuild();
 
+  before(() => {
+    cy.task('setupDb');
+  });
+
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('trello_token');
     cy.visit('/');

@@ -7,6 +7,10 @@ describe('Sending requests', () => {
 
   let boardId = null;
 
+  before(() => {
+    cy.task('setupDb');
+  });
+
   beforeEach(() => {
     cy.visit('/');
   });

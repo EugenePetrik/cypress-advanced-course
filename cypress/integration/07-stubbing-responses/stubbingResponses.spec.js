@@ -5,6 +5,10 @@ import { boardBuilder } from '../../support/generateData';
 describe('Stubbing responses', () => {
   const { boardName } = boardBuilder();
 
+  beforeEach(() => {
+    cy.task('setupDb');
+  });
+
   it('Stubbing responses #1', () => {
     cy.intercept(
       {
@@ -50,11 +54,11 @@ describe('Stubbing responses', () => {
 
     cy.visit('/');
     cy.createBoard(boardName);
-    cy.wait('@createBoard');
     cy.get('[data-cy=error-message]').should('be.visible').and('have.text', 'There was an error creating board');
   });
 
   it('Stubbing responses #4', () => {
+    cy.visit('/');
     cy.createBoard(boardName);
 
     cy.intercept(

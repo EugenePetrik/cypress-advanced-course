@@ -10,6 +10,9 @@ describe('Chaining commands', () => {
   let boardId = null;
 
   before(() => {
+    cy.task('setupDb');
+
+    cy.visit('/');
     cy.createBoard(boardName);
     cy.url().then(url => {
       boardId = url.match(/(\d+)$/)[0];
@@ -19,10 +22,6 @@ describe('Chaining commands', () => {
   beforeEach(() => {
     cy.visit(`/board/${boardId}`);
     cy.addList(listName);
-  });
-
-  after(() => {
-    cy.removeBoard();
   });
 
   it('Chaining commands', () => {
