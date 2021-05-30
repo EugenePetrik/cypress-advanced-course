@@ -24,8 +24,10 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import 'cypress-file-upload';
+import 'cypress-real-events/support';
+
 Cypress.Commands.add('createBoard', boardName => {
-  cy.visit('/');
   cy.get('[data-cy=create-board]').click();
   cy.get('[data-cy=new-board-input]').type(boardName);
   cy.get('[data-cy=new-board-create]').click();
