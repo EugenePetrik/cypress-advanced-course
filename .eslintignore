@@ -1,2 +1,3 @@
 node_modules
 app
+cypress/support/commands.d.ts
