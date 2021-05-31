@@ -1,0 +1,79 @@
+defaults: &defaults
+  working_directory: ~/cypress-advanced-course
+  docker:
+    - image: 'cimg/node:16.2.0-browsers'
+
+caches:
+  - &npm_cache cypress-advanced-course-v1{{ checksum "package.json" }}
+
+references:
+  restore_npm_cache: &restore_npm_cache
+    restore_cache:
+      keys:
+        - *npm_cache
+
+  npm_install: &npm_install
+    run:
+      name: Installing project dependencies
+      command: npm install
+
+  save_npm_cache: &save_npm_cache
+    save_cache:
+      name: Save npm package cache
+      key: *npm_cache
+      paths:
+        - ~/.cache
+
+version: 2.1
+
+jobs:
+  cypress:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - <<: *restore_npm_cache
+      - <<: *npm_install
+      - <<: *save_npm_cache
+
+      - run:
+          name: Installing Cypress dependencies
+          command: |
+            sudo apt update
+            sudo apt-get install cmake xvfb libgbm-dev libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth
+      
+      - run:
+          name: Starting Front-end server
+          command: npm run start
+          background: true
+
+      - run:
+          name: Running Cypress tests
+          command: npm run cy:run
+
+      - run:
+          name: Generate Allure Report
+          command: npm run allure:report:ci
+          when: always
+
+      - store_artifacts:
+          name: Upload Allure Report
+          path: ~/cypress-advanced-course/allure-report/
+          destination: allure-report/
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - cypress
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 1 * * *"
+          filters:
+            branches:
+              only: main
+
+    jobs:
+      - cypress
