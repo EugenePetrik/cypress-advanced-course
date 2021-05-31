@@ -61,6 +61,18 @@ jobs:
           path: ~/cypress-advanced-course/allure-report/
           destination: allure-report/
 
+      - store_artifacts:
+          name: Saving Cypress screenshots
+          path: ~/cypress-sample-project/cypress/screenshots
+          destination: /cypress-screenshots
+          when: on-fail
+
+      - store_artifacts:
+          name: Saving Cypress videos
+          path: ~/cypress-sample-project/cypress/videos
+          destination: /cypress-videos
+          when: on-fail
+
 workflows:
   version: 2.1
   build:

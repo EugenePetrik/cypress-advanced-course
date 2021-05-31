@@ -7,19 +7,13 @@ describe('Changing the DOM', () => {
   const { listName } = listBuilder();
   const { taskName } = taskBuilder();
 
-  let boardId = null;
-
   beforeEach(() => {
     cy.task('setupDb');
-
     cy.visit('/');
-    cy.createBoard(boardName);
-    cy.url().then(url => {
-      boardId = url.match(/(\d+)$/)[0];
-    });
   });
 
   it('Changing the DOM #1', () => {
+    cy.createBoard(boardName);
     cy.visit('/');
     cy.get('[data-cy=star]').invoke('show').click();
     cy.get('[data-cy=my-starred-boards]')
@@ -29,8 +23,7 @@ describe('Changing the DOM', () => {
   });
 
   it('Changing the DOM #2', () => {
-    cy.visit(`/board/${boardId}`);
-
+    cy.createBoard(boardName);
     cy.addList(listName);
 
     cy.addTask(`${taskName} #1`);
@@ -44,6 +37,7 @@ describe('Changing the DOM', () => {
   });
 
   it('Changing the DOM #3', () => {
+    cy.createBoard(boardName);
     cy.visit('/');
 
     cy.get('[data-cy=board-item]').trigger('mouseover');
