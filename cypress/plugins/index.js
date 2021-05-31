@@ -13,6 +13,7 @@
 // the project's config changing)
 
 const { setupDb } = require('./setupDb');
+const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
 /**
  * @type {Cypress.PluginConfig}
@@ -22,4 +23,7 @@ module.exports = (on, config) => {
   on('task', {
     setupDb,
   });
+
+  allureWriter(on, config);
+  return config;
 };
